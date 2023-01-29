@@ -32,18 +32,32 @@ $result = mysqli_query( $conn, $sql );
  </head> 
  <body> 
     <?php
+        echo "<section id=\"navigation\">";
         require  "nav.html";
+        echo "</section>";
+        echo "<section id=\"heading\">";
         require "header.html";
+        echo "</section>";
 
         while($row = mysqli_fetch_assoc($result)){
+            // $sqlupdate1 = "UPDATE tasks SET fullfield=1 WHERE ID={$rows['ID']} ";
             $name = $row["name"];
-            echo "<section>";
+            echo "<section id=\"list\">";
             echo "<ul>";
             echo "<li>" . $name . "</li>";
+            echo "<a href=\"index.php?del_task=" . $row['ID'] . "\"> X </a>";
             echo "</ul>";
             echo "</section>";
 
         }
+
+        if (isset($_GET['del_task'])) {
+            $id = $_GET['del_task'];
+        
+            mysqli_query($db, "UPDATE tasks SET fullfield=1 WHERE id=".$id);
+            header('location: index.php');
+        }
+        
     ?>
 
  </body> 

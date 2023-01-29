@@ -34,9 +34,7 @@ if ( !$conn ) {
         <lable for="name">Name <br></lable>
         <input type="text" name="name"><br>   
         <lable for="priority">Priority <br></lable>
-        <input type="text" name="priority"><br>  
-        <!-- <lable for="fullfield">fullfield?<br></lable>
-        <input type="text" -->
+        <input type="text" name="priority"><br>
 
         <input type="submit" value="Add">
     </form>
