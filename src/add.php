@@ -36,8 +36,9 @@ $result1 = mysqli_query($conn, $sql1 );
   </head>
   <body>
   <?php
-        require "nav.html"; 
-        require "header.html";
+        echo "<section id=\"navigation\">";
+        require  "nav.html";
+        echo "</section>";
         
         $row = mysqli_fetch_assoc($result1);
         $id = $row["ID"];

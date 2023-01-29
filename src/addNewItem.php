@@ -18,28 +18,30 @@ if ( !$conn ) {
   <head>
     <title>To do list</title>
     <meta charset="utf-8"> 
-    <link rel="stylesheet" type="text/css"  href="create.css">
+    <link rel="stylesheet" type="text/css"  href="style.css">
     <link rel="icon"       type="image/png" href="media/lgog.png">
   </head>
   <body>
   <?php
-        require "nav.html"; 
-        require "header.html";
+          echo "<section id=\"navigation\">";
+          require  "nav.html";
+          echo "</section>";
+          
       ?>
-<main>
-  <h1 id="ch1">Add new task to the to do list </h1>
-  <p>Here you can write a new task and add it to the to do list</p>
-    <form id="one" action="add.php" method="post"> <!-- TODO:  Make the add php file for adding purposes!-->
+        <main>
+        <h1 id="ch1">Add new task to the to do list </h1>
+        <p>Here you can write a new task and add it to the to do list</p>
+            <form id="one" action="add.php" method="post"> <!-- TODO:  Make the add php file for adding purposes!-->
 
-        <lable for="name">Name <br></lable>
-        <input type="text" name="name"><br>   
-        <lable for="priority">Priority <br></lable>
-        <input type="text" name="priority"><br>
+                <lable for="name">Name <br></lable>
+                <input type="text" name="name"><br>   
+                <lable for="priority">Priority <br></lable>
+                <input type="text" name="priority"><br>
 
-        <input type="submit" value="Add">
-    </form>
+                <input type="submit" value="Add">
+            </form>
 
-</main>
+        </main>
   </body>
 </html>
 <?php 

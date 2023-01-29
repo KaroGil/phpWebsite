@@ -15,9 +15,10 @@ if( !$conn ){
     die("Connection failed: " . mysqli_connect_error());
 }
 
+$limit = 10;
 
-//hent ut 
-$sql = "SELECT * FROM tasks WHERE fullfield=0 ORDER BY priority LIMIT 7";
+//get the data from the database
+$sql = "SELECT * FROM tasks WHERE fullfield=0 ORDER BY priority LIMIT " . $limit;
 $result = mysqli_query( $conn, $sql );
 
 ?>
@@ -35,30 +36,28 @@ $result = mysqli_query( $conn, $sql );
         echo "<section id=\"navigation\">";
         require  "nav.html";
         echo "</section>";
-        echo "<section id=\"heading\">";
-        require "header.html";
-        echo "</section>";
+       
 
+        echo "<ul class=\"list\">";
         while($row = mysqli_fetch_assoc($result)){
-            // $sqlupdate1 = "UPDATE tasks SET fullfield=1 WHERE ID={$rows['ID']} ";
             $name = $row["name"];
-            echo "<section id=\"list\">";
-            echo "<ul>";
+            echo "<section class=\"listItem\">";
             echo "<li>" . $name . "</li>";
-            echo "<a href=\"index.php?del_task=" . $row['ID'] . "\"> X </a>";
-            echo "</ul>";
+            echo "<a href=\"index.php?complete_task=" . $row['ID'] . "\"> X </a>";
             echo "</section>";
-
         }
+        echo "</ul>";
 
-        if (isset($_GET['del_task'])) {
-            $id = $_GET['del_task'];
+        // echo "<a href=\"index.php?len=" . $limit*2 . "\"> Show more</a>";
 
-            $sql = "UPDATE tasks SET fullfield=1 WHERE ID=" . $id;
+        if (isset($_GET['complete_task'])) {
+            $id = $_GET['complete_task'];
+
+            $sql = "UPDATE tasks SET fullfield=1 WHERE ID=" . $id;  
             mysqli_query($conn, $sql);
             header('location: index.php');
         }
-        
+
     ?>
 
  </body> 

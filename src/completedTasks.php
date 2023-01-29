@@ -16,8 +16,8 @@ if( !$conn ){
 }
 
 
-//hent ut 
-$sql = "SELECT * FROM tasks WHERE fullfield=1 ORDER BY ID ";
+//get data out of database
+$sql = "SELECT * FROM tasks WHERE fullfield=1 ORDER BY priority";
 $result = mysqli_query( $conn, $sql );
 
 ?>
@@ -32,28 +32,28 @@ $result = mysqli_query( $conn, $sql );
  </head> 
  <body> 
     <?php
+        //add navigation bar and header
         echo "<section id=\"navigation\">";
         require  "nav.html";
         echo "</section>";
-        echo "<section id=\"heading\">";
-        require "header.html";
-        echo "</section>";
+       
 
+        //header for completed tasks
         echo "<h2>Completed tasks</h2>";
 
+        //looping through results and printing them out
+        echo "<ul class=\"list\">";
         while($row = mysqli_fetch_assoc($result)){
             $name = $row["name"];
-            echo "<section id=\"list\">";
-            echo "<ul>";
+            echo "<section class=\"listItem\">";
             echo "<li>" . $name . "</li>";
-            echo "<a href=\"index.php?del_task=" . $row['ID'] . "\"> X </a>";
-            echo "</ul>";
+            echo "<a href=\"completedTasks.php?reverse_task=" . $row['ID'] . "\"> Reverse </a>";    //reverse button to add task back to to do li
             echo "</section>";
-
         }
 
-        if (isset($_GET['del_task'])) {
-            $id = $_GET['del_task'];
+        //reverse task action if statement, updates fullfilment column
+        if (isset($_GET['reverse_task'])) {
+            $id = $_GET['reverse_task'];
 
             $sql = "UPDATE tasks SET fullfield=0 WHERE ID=" . $id;
             mysqli_query($conn, $sql);
