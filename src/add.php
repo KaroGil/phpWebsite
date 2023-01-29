@@ -45,7 +45,7 @@ $result1 = mysqli_query($conn, $sql1 );
 
         echo "<h3> Sucess in adding " . $displayName . " to the database! </h3>"; 
 
-
+        header('location: index.php');
 
     ?>  
     

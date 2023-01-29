@@ -17,7 +17,7 @@ if( !$conn ){
 
 
 //hent ut 
-$sql = "SELECT * FROM tasks WHERE fullfield=0 ORDER BY priority LIMIT 7";
+$sql = "SELECT * FROM tasks WHERE fullfield=1 ORDER BY ID ";
 $result = mysqli_query( $conn, $sql );
 
 ?>
@@ -39,8 +39,9 @@ $result = mysqli_query( $conn, $sql );
         require "header.html";
         echo "</section>";
 
+        echo "<h2>Completed tasks</h2>";
+
         while($row = mysqli_fetch_assoc($result)){
-            // $sqlupdate1 = "UPDATE tasks SET fullfield=1 WHERE ID={$rows['ID']} ";
             $name = $row["name"];
             echo "<section id=\"list\">";
             echo "<ul>";
@@ -54,7 +55,7 @@ $result = mysqli_query( $conn, $sql );
         if (isset($_GET['del_task'])) {
             $id = $_GET['del_task'];
 
-            $sql = "UPDATE tasks SET fullfield=1 WHERE ID=" . $id;
+            $sql = "UPDATE tasks SET fullfield=0 WHERE ID=" . $id;
             mysqli_query($conn, $sql);
             header('location: index.php');
         }
